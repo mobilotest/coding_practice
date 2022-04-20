@@ -31,7 +31,7 @@ public class Loops {
         //Nested For:
         for(int n=0; n<10;n++){
             System.out.println("*");
-            for(int m=i;m>=0;m--){
+            for(int m=n;m>=0;m--){
                 System.out.print("-");
             }
         }
