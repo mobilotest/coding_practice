@@ -1,10 +1,11 @@
 package javaTraining;
 
 public class Car {
-    String type;
-    int model;
-    double mileDrive;
-    double price;
+    public String type;
+    public int model;
+    public double mileDrive;
+    public double price;
+    static String owner;
     double getPrice(){
         double newPice = price - (mileDrive*100);
         return newPice;
