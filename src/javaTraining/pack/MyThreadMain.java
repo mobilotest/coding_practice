@@ -9,5 +9,10 @@ public class MyThreadMain {
         System.out.println("Thread is working");
         t1.sleep(7000);
         t1.isRunning = false;
+
+        //For Runnable:
+        myRunnable r = new myRunnable("runnable");
+        Thread t = new Thread(r);
+        t.start();
     }
 }
