@@ -10,7 +10,8 @@ public class Connect2dB {
             c = DriverManager.getConnection("jdbc:sqlite:info.db");
             System.out.println("Connected successfully");
             //add user
-            System.out.println("Select the process\n1 - add\n2 = selection");
+            System.out.println("Select the process\n1 - add\n2 = select\n3 - delete\n4 - update password");
+            Statement stmt = c.createStatement();
             Scanner reader = new Scanner(System.in);
             int processIndex = reader.nextInt();
             switch (processIndex){
@@ -22,19 +23,17 @@ public class Connect2dB {
                     String user_name = username.nextLine();
                     System.out.print("Enter password: ");
                     String password = passcode.nextLine();
-                    String SQLadd = "insert into admins (user_name, password) values ('"+user_name+"','"+password+"')";
-                    Statement stmt1 = c.createStatement();
-                    stmt1.executeUpdate(SQLadd);
+                    String SQLadd = "Insert into admins (user_name, password) values ('"+user_name+"','"+password+"')";
+                    stmt.executeUpdate(SQLadd);
+                    stmt.close();
                     c.commit(); //add //delete //update
-                    stmt1.close();
                     c.close();
                     System.out.println("Record is added");
                     break;
                 case 2:
                     //selection
-                    Statement stmt2 = c.createStatement();
-                    String SWLread = "select * from adming";
-                    ResultSet rs = stmt2.executeQuery(SWLread);
+                    String SWLread = "Select * from adming";
+                    ResultSet rs = stmt.executeQuery(SWLread);
                     System.out.println("id\tUserName\tPassWord");
                     while (rs.next()){
                         int id = rs.getInt("id");
@@ -43,8 +42,35 @@ public class Connect2dB {
                         System.out.println(id+"\t"+UserName+"\t"+PassWord);
                     }
                     rs.close();
-                    stmt2.close();
+                    stmt.close();
                     c.close();
+                    break;
+                case 3:
+                    //delete
+                    Scanner IDdelete = new Scanner(System.in);
+                    System.out.print("Enter ID: ");
+                    int id_del = IDdelete.nextInt();
+                    String SQLdelete = "Delete from admins where (id) value: "+id_del;
+                    stmt.executeUpdate(SQLdelete);
+                    stmt.close();
+                    c.commit(); //add //delete //update
+                    c.close();
+                    System.out.println("Record is deleted");
+                    break;
+                case 4:
+                    //update password
+                    Scanner IDupdate = new Scanner(System.in);
+                    Scanner PasscodeUpdate = new Scanner(System.in);
+                    System.out.print("Enter ID: ");
+                    int id_upd = IDupdate.nextInt();
+                    System.out.print("Enter new password: ");
+                    String password_new = PasscodeUpdate.nextLine();
+                    String SQLupdate = "Update admins set password = '"+password_new+"'"+"where id= "+ id_upd;
+                    stmt.executeUpdate(SQLupdate);
+                    stmt.close();
+                    c.commit(); //add //delete //update
+                    c.close();
+                    System.out.println("Record is updated");
                     break;
                 default:
                     break;
