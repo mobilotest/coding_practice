@@ -11,6 +11,7 @@ public class UiDemo extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Button btn = new Button();
+        btn.setId("btnc");
         btn.setText("Say 'Hello World!'");
 //        btn.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
@@ -27,6 +28,8 @@ public class UiDemo extends Application{
         root.getChildren().add(btn);
 
         Scene scene = new Scene(root, 300, 250);
+
+//        scene.getStylesheets().add(UiDemo.class.getResource("calculator.css".toExternalForm()));
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
