@@ -22,6 +22,5 @@ public class StringsMore {
         final String s8 = "You cannot ";
         String s9 = s8+"change Me";
         System.out.println(s4==s9);
-
     }
 }
